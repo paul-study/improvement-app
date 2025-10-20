@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLift - Your Personal Growth Hub</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">LifeLift</div>
+            <ul class="nav-links">
+                <li><a href="#self-talk">Self-Talk</a></li>
+                <li><a href="#motivation">Motivation</a></li>
+                <li><a href="#exercises">Exercises</a></li>
+                <li><a href="#goals">Goals</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#habits">Habits</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Transform Your Life, One Day at a Time</h1>
+                <p>Your journey to personal growth starts here</p>
+                <button class="cta-button" onclick="scrollToSection('goals')">Set Your First Goal</button>
+            </div>
+        </section>
+
+        <!-- Self-Talk Section -->
+        <section id="self-talk" class="section">
+            <div class="container">
+                <h2>Positive Self-Talk</h2>
+                <p class="section-subtitle">Rewire your mind with empowering affirmations</p>
+                <div class="affirmation-card">
+                    <p id="current-affirmation" class="affirmation-text">Loading...</p>
+                    <button class="btn-primary" onclick="getNewAffirmation()">New Affirmation</button>
+                </div>
+                <div class="custom-affirmation">
+                    <h3>Create Your Own</h3>
+                    <input type="text" id="custom-affirmation-input" placeholder="I am...">
+                    <button class="btn-secondary" onclick="addCustomAffirmation()">Add to My List</button>
+                </div>
+                <div id="my-affirmations" class="affirmation-list"></div>
+            </div>
+        </section>
+
+        <!-- Motivational Section -->
+        <section id="motivation" class="section bg-light">
+            <div class="container">
+                <h2>Daily Motivation</h2>
+                <p class="section-subtitle">Fuel your drive with inspiring quotes</p>
+                <div class="quote-card">
+                    <blockquote id="current-quote">
+                        <p class="quote-text">Loading...</p>
+                        <footer class="quote-author">- Author</footer>
+                    </blockquote>
+                    <button class="btn-primary" onclick="getNewQuote()">Next Quote</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Exercises Section -->
+        <section id="exercises" class="section">
+            <div class="container">
+                <h2>Daily Exercises</h2>
+                <p class="section-subtitle">Activities to boost your mental and physical well-being</p>
+                <div class="exercise-grid">
+                    <div class="exercise-card">
+                        <h3>🧘‍♀️ Mindfulness</h3>
+                        <p>5-minute meditation to center yourself</p>
+                        <button class="btn-exercise" onclick="startExercise('meditation')">Start</button>
+                    </div>
+                    <div class="exercise-card">
+                        <h3>📝 Journaling</h3>
+                        <p>Reflect on your day and gratitude</p>
+                        <button class="btn-exercise" onclick="startExercise('journaling')">Start</button>
+                    </div>
+                    <div class="exercise-card">
+                        <h3>🏃‍♂️ Movement</h3>
+                        <p>Quick workout to energize your body</p>
+                        <button class="btn-exercise" onclick="startExercise('movement')">Start</button>
+                    </div>
+                    <div class="exercise-card">
+                        <h3>🎯 Focus Practice</h3>
+                        <p>25-minute deep work session</p>
+                        <button class="btn-exercise" onclick="startExercise('focus')">Start</button>
+                    </div>
+                    <div class="exercise-card">
+                        <h3>🌬️ Breathing</h3>
+                        <p>Box breathing for stress relief</p>
+                        <button class="btn-exercise" onclick="startExercise('breathing')">Start</button>
+                    </div>
+                    <div class="exercise-card">
+                        <h3>💭 Visualization</h3>
+                        <p>Picture your ideal future self</p>
+                        <button class="btn-exercise" onclick="startExercise('visualization')">Start</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goals Section -->
+        <section id="goals" class="section bg-light">
+            <div class="container">
+                <h2>Goal Setting</h2>
+                <p class="section-subtitle">Define your aspirations and track your progress</p>
+                <div class="goal-input-area">
+                    <input type="text" id="goal-title" placeholder="What do you want to achieve?">
+                    <select id="goal-category">
+                        <option value="health">Health</option>
+                        <option value="career">Career</option>
+                        <option value="learning">Learning</option>
+                        <option value="relationships">Relationships</option>
+                        <option value="finance">Finance</option>
+                        <option value="personal">Personal Growth</option>
+                    </select>
+                    <input type="date" id="goal-deadline">
+                    <button class="btn-primary" onclick="addGoal()">Add Goal</button>
+                </div>
+                <div id="goals-list" class="goals-container"></div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="achievements" class="section">
+            <div class="container">
+                <h2>Achievements & Milestones</h2>
+                <p class="section-subtitle">Celebrate your wins, big and small</p>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="total-goals">0</div>
+                        <div class="stat-label">Goals Set</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="completed-goals">0</div>
+                        <div class="stat-label">Goals Achieved</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="exercises-completed">0</div>
+                        <div class="stat-label">Exercises Done</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="streak-days">0</div>
+                        <div class="stat-label">Day Streak</div>
+                    </div>
+                </div>
+                <div class="achievement-input">
+                    <h3>Log an Achievement</h3>
+                    <input type="text" id="achievement-text" placeholder="What did you accomplish today?">
+                    <button class="btn-primary" onclick="addAchievement()">Add Achievement</button>
+                </div>
+                <div id="achievements-list" class="achievements-container"></div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section bg-light">
+            <div class="container">
+                <h2>Skills Development</h2>
+                <p class="section-subtitle">Build expertise through deliberate practice</p>
+                <div class="skills-input">
+                    <input type="text" id="skill-name" placeholder="Skill to develop">
+                    <select id="skill-level">
+                        <option value="beginner">Beginner</option>
+                        <option value="intermediate">Intermediate</option>
+                        <option value="advanced">Advanced</option>
+                    </select>
+                    <button class="btn-primary" onclick="addSkill()">Track Skill</button>
+                </div>
+                <div id="skills-list" class="skills-container"></div>
+                
+                <div class="skill-ideas">
+                    <h3>Skill Ideas</h3>
+                    <div class="skill-tags">
+                        <span class="tag" onclick="quickAddSkill('Public Speaking')">Public Speaking</span>
+                        <span class="tag" onclick="quickAddSkill('Time Management')">Time Management</span>
+                        <span class="tag" onclick="quickAddSkill('Coding')">Coding</span>
+                        <span class="tag" onclick="quickAddSkill('Writing')">Writing</span>
+                        <span class="tag" onclick="quickAddSkill('Leadership')">Leadership</span>
+                        <span class="tag" onclick="quickAddSkill('Financial Literacy')">Financial Literacy</span>
+                        <span class="tag" onclick="quickAddSkill('Communication')">Communication</span>
+                        <span class="tag" onclick="quickAddSkill('Emotional Intelligence')">Emotional Intelligence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Habits Section -->
+        <section id="habits" class="section">
+            <div class="container">
+                <h2>Build from Ground Up</h2>
+                <p class="section-subtitle">Develop lasting habits through consistency</p>
+                <div class="habit-tracker">
+                    <h3>30-Day Habit Challenge</h3>
+                    <div class="habit-input">
+                        <input type="text" id="habit-name" placeholder="Habit to build (e.g., Read 10 pages daily)">
+                        <button class="btn-primary" onclick="addHabit()">Start Challenge</button>
+                    </div>
+                    <div id="habits-list" class="habits-container"></div>
+                </div>
+                
+                <div class="habit-tips">
+                    <h3>Tips for Building Habits</h3>
+                    <ul>
+                        <li>Start small - commit to just 2 minutes daily</li>
+                        <li>Stack habits - attach new habits to existing routines</li>
+                        <li>Track your progress - check off each day</li>
+                        <li>Be patient - it takes time to form lasting habits</li>
+                        <li>Don't break the chain - consistency is key</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Resources Section -->
+        <section id="resources" class="section bg-light">
+            <div class="container">
+                <h2>Additional Resources</h2>
+                <p class="section-subtitle">Tools and content to support your journey</p>
+                <div class="resources-grid">
+                    <div class="resource-card">
+                        <h3>📚 Reading List</h3>
+                        <ul>
+                            <li>Atomic Habits - James Clear</li>
+                            <li>The 7 Habits of Highly Effective People - Stephen Covey</li>
+                            <li>Mindset - Carol Dweck</li>
+                            <li>Deep Work - Cal Newport</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <h3>🎧 Podcasts</h3>
+                        <ul>
+                            <li>The Tim Ferriss Show</li>
+                            <li>How I Built This</li>
+                            <li>The School of Greatness</li>
+                            <li>On Purpose with Jay Shetty</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <h3>🧰 Tools</h3>
+                        <ul>
+                            <li>Pomodoro Timer for focus</li>
+                            <li>Habit Tracking Apps</li>
+                            <li>Meditation Apps</li>
+                            <li>Goal Planning Templates</li>
+                        </ul>
+                    </div>
+                    <div class="resource-card">
+                        <h3>🌟 Daily Practices</h3>
+                        <ul>
+                            <li>Morning routine optimization</li>
+                            <li>Evening reflection</li>
+                            <li>Weekly reviews</li>
+                            <li>Monthly goal reassessment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Modal for Exercises -->
+    <div id="exercise-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeExerciseModal()">&times;</span>
+            <div id="exercise-content"></div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 LifeLift - Your Personal Growth Hub</p>
+            <p>Invest in yourself. You're worth it.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
